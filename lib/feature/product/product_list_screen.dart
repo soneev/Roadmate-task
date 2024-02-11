@@ -63,7 +63,7 @@ class ProductListScreen extends StatelessWidget {
                       onTap: (index) {
                         staticProvider.subCatProductList.clear();
                         staticProvider.setTabIndex(index);
-                        print(index.toString());
+                   
                         if (index == 0) {
                           staticProvider.setSearchbar(true);
                           staticProvider.getAllProductslist();

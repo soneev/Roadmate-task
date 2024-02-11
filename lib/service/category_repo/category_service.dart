@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:dio/dio.dart';
 import 'package:partnerapp/model/category_list_model.dart';
 import 'package:partnerapp/model/product_by_category_model.dart';
-import 'package:partnerapp/model/product_list_model.dart';
+
 import 'package:partnerapp/model/subcategory_list_model.dart';
 import 'package:partnerapp/utils/route/service_utils.dart';
 

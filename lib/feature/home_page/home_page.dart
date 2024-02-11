@@ -9,6 +9,7 @@ import 'package:partnerapp/widgets/custom_text.dart';
 import 'package:provider/provider.dart';
 
 import 'widgets/feature_product_card.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -52,9 +53,20 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding:
                   const EdgeInsets.only(top: 5, bottom: 5, right: 20, left: 10),
-              child: CustomSvgImage(
-                imageName: 'cart',
-              ),
+              child:
+                  Consumer<ProductProvider>(builder: (context, value, child) {
+                return badges.Badge(
+                  showBadge: value.cartList!.isEmpty ? false : true,
+                  badgeContent: Text(
+                    value.cartCount.toString(),
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  badgeStyle: const badges.BadgeStyle(badgeColor: Colors.red),
+                  child: CustomSvgImage(
+                    imageName: 'cart',
+                  ),
+                );
+              }),
             ),
           ),
         ],

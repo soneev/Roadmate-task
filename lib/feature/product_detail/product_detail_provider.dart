@@ -35,7 +35,7 @@ class DetailProvider extends ChangeNotifier {
         setLoader(false);
       }
     } catch (e) {
-      print('Dio Error: $e');
+      log('Dio Error: $e');
     }
     notifyListeners();
   }

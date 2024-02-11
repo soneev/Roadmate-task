@@ -4,15 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:partnerapp/model/cart_list_model.dart';
 import 'package:partnerapp/model/category_list_model.dart';
 import 'package:partnerapp/model/product_by_category_model.dart';
-import 'package:partnerapp/model/product_detail_model.dart';
+
 import 'package:partnerapp/model/product_list_model.dart';
 import 'package:partnerapp/model/subcategory_list_model.dart';
 import 'package:partnerapp/service/cart_repo/cart_service.dart';
 import 'package:partnerapp/service/category_repo/category_service.dart';
 import 'package:partnerapp/service/prodduct_repo/product_service.dart';
-import 'package:provider/provider.dart';
-
-import '../home_page/homepage_provider.dart';
 
 class ProductProvider extends ChangeNotifier {
   ProductProvider() {
@@ -22,6 +19,10 @@ class ProductProvider extends ChangeNotifier {
     await getCategorylist();
     await getAllProductslist();
     await getCartList();
+  }
+
+  int get cartCount {
+    return cartList!.fold(0, (sum, item) => sum + item.qty!.toInt());
   }
 
   int currentIndex = 0;
@@ -81,7 +82,7 @@ class ProductProvider extends ChangeNotifier {
         setLoader(false);
       }
     } catch (e) {
-      print('Dio Error: $e');
+      log('Dio Error: $e');
     }
   }
 
@@ -98,7 +99,7 @@ class ProductProvider extends ChangeNotifier {
         setLoader(false);
       }
     } catch (e) {
-      print('Dio Error: $e');
+      log('Dio Error: $e');
     }
   }
 
@@ -118,7 +119,7 @@ class ProductProvider extends ChangeNotifier {
         setLoader(false);
       }
     } catch (e) {
-      print('Dio Error: $e');
+      log('Dio Error: $e');
     }
   }
 
@@ -133,12 +134,11 @@ class ProductProvider extends ChangeNotifier {
         subCatProductList.clear();
 
         subCatProductList = response.productlist;
-        log("${subCatProductList[0].toJson()}");
       } else {
         setLoader(false);
       }
     } catch (e) {
-      print('Dio Error: $e');
+      log('Dio Error: $e');
     }
   }
 
@@ -157,7 +157,7 @@ class ProductProvider extends ChangeNotifier {
         setMoreLoader(false);
       }
     } catch (e) {
-      print('Dio Error: $e');
+      log('Dio Error: $e');
     }
   }
 
@@ -177,15 +177,23 @@ class ProductProvider extends ChangeNotifier {
         setMoreLoader(false);
       }
     } catch (e) {
-      print('Dio Error: $e');
+      log('Dio Error: $e');
     }
+  }
+
+  void removeCartItem({required int index, required int cartId}) {
+    if (index >= 0 && index < cartList!.length) {
+      cartList!.removeAt(index);
+      notifyListeners();
+    }
+    deleteCartItem(cartId);
   }
 
   Future<void> deleteCartItem(int id) async {
     try {
       final response = await CartService().delete(id);
     } catch (e) {
-      print('Dio Error: $e');
+      log('Dio Error: $e');
     }
   }
 }

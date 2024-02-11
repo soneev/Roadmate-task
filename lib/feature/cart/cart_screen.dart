@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:partnerapp/feature/product/product_provider.dart';
 import 'package:partnerapp/widgets/custom_app_bar.dart';
@@ -169,7 +169,8 @@ class CartScreen extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                staticProvider.deleteCartItem(item.id!.toInt());
+                                staticProvider.removeCartItem(
+                                    index: index, cartId: item.id!.toInt());
                               },
                               child: const Padding(
                                 padding: EdgeInsets.all(8.0),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:partnerapp/feature/home_page/home_page.dart';
 import 'package:partnerapp/feature/landing_page/landing_provider.dart';
 import 'package:partnerapp/utils/route/color/app_colors.dart';
-import 'package:partnerapp/widgets/clipper.dart';
+
 import 'package:partnerapp/widgets/custom_image.dart';
 import 'package:provider/provider.dart';
 
@@ -92,7 +92,6 @@ class LandingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final staticprovider = Provider.of<LandingProvider>(context, listen: false);
     return SafeArea(
       child: Scaffold(
           floatingActionButtonLocation:
